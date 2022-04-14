@@ -42,7 +42,7 @@ workflows:
           requires:
             - build
       - deploy:
-        requires:
-          - test-node
-          - test-node-16
-          - test-node-14
+          requires:
+            - test-node
+            - test-node-16
+            - test-node-14
