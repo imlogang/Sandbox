@@ -11,6 +11,7 @@ jobs:
           name: Restore Yarn Package Json Cache
           keys: 
             - v1-yarn-cache-{{checksum 'package.json'}} 
+            - v1-yarn-cache
       - run:
           name: Install Dependencies
           command: yarn install --immutable
