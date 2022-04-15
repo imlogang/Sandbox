@@ -1,40 +1,32 @@
 version: 2.1
 
 parameters:
-  condition-workflow:
+  run_by_api:
     type: boolean
-    default: true
+    default: false
 
 jobs:
-  my-job:
+  regular:
     docker:
       - image: cimg/base:2022.03
     steps:
       - checkout
-      - when:
-          condition:
-            or:
-            # Add condition to execute this step when the github branch is equal to 'main'
-            - equal: [ main, << pipeline.git.branch >> ]
-          steps:
-            - run: echo "I am on main"
+      - run: echo "I was run normally"
 
-  conditional-job:
+  api-job:
     docker:
       - image: cimg/base:2022.03
     steps:
       - checkout
-      - run: echo "This ran on a pipeline parameter"
+      - run: echo "I was run by API"
 
 workflows:
-  my-workflow:
+  normal:
     jobs:
-      - my-job
+      - regular
 
-  conditional-workflow:
-    when:
-      and:
-        # Add condition to execute this workflow when condition-workflow is equal to true
-        - equal: [ true ]
+  api-workflow:
+    when: << pipeline.parameters.run_by_api >> # Without modifying the config, run api-job
     jobs:
-      - conditional-job
+      - api-job
+
