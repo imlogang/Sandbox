@@ -9,7 +9,7 @@ executors:
       xcode: 12.5.1
 
 orbs:
-  node: circleci/node@5.0.0
+  node: circleci/node@5.0.2
 
 jobs:
   test:
@@ -34,6 +34,6 @@ workflows:
           matrix:
             # Add below this line to setup matrix build
             parameters: 
-              version: ["12.9.1", "13.9.0", "14.18.2", "16.13.1"]
-              platform: ["linux", "macos"]
+              node-version: ["12.9.1", "13.9.0", "14.18.2", "16.13.1"]
+              os: ["linux", "macos"]
               
