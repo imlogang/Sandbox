@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  win: circleci/windows@4.1
+
 jobs:
   build-docker:
     docker:
@@ -7,11 +10,14 @@ jobs:
     steps:
       - run: echo "docker image"
   build-windows:
-    executor: win/default
+    executor: 
+      name: win/default
+      size: "medium"
     steps:
-      - run: echo "windows image"
+      - run: Write-Host 'hellow, windows.'
   build-macos:
-    xcode: 12.5.1
+    macos:
+      xcode: 12.5.1
     steps:
       - run: xcodebuild --version
 
