@@ -22,6 +22,7 @@ jobs:
   build:
     docker:
       - image: cimg/node:17.9.0
+    working_directory: ~/randomfolder
     steps:
       - run: echo "console.log('complete')" | node
       - generatelogs
