@@ -6,7 +6,7 @@ commands:
     parameters:
       path:
         type: string
-        default: "~/randomfolder"
+        default: "~/project"
     steps:
       - run: echo "Log file" > <<parameters.path>>/log.txt
   endmission:
@@ -22,7 +22,6 @@ jobs:
   build:
     docker:
       - image: cimg/node:17.9.0
-    working_directory: ~/randomfolder
     steps:
       - run: echo "console.log('complete')" | node
       - generatelogs
