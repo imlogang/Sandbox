@@ -1,40 +1,23 @@
 version: 2.1
 
-commands:
-  generatelogs:
-    description: "A command to generate a log file"
-    parameters:
-      path:
-        type: string
-        default: "~/project"
-    steps:
-      - run: echo "Log file" > <<parameters.path>>/log.txt
-  endmission:
-    description: "Use the parameters of this command to exit this mission with a green build."
-    parameters:
-      exitCode:
-        type: integer
-        default: 0
-    steps:
-      - run: exit <<parameters.exitCode>>
-
 jobs:
-  build:
+  build-docker:
     docker:
-      - image: cimg/node:17.9.0
+      - image: cimg/node:17.2.0
     steps:
-      - run: echo "console.log('complete')" | node
-      - generatelogs
-      - run:
-          name: Check for logs - DO NOT MODIFY
-          command: |
-            if [ ! -f ~/project/log.txt ]; then
-              echo "The log should exist at ~/project/log.txt after running the 'generatelogs' command"
-              exit 1
-            fi
-      - endmission
+      - run: echo "docker image"
+  build-windows:
+    executor: win/default
+    steps:
+      - run: echo "windows image"
+  build-macos:
+    xcode: 12.5.1
+    steps:
+      - run: xcodebuild --version
 
 workflows:
-  build-workflow:
+  build-docker-workflow:
     jobs:
-      - build
+      - build-docker
+      - build-windows
+      - build-macos
