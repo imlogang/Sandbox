@@ -19,7 +19,7 @@ jobs:
     macos:
       xcode: 12.5.1
     steps:
-      - run: xcodebuild --version
+      - run: xcodebuild -version
 
 workflows:
   build-docker-workflow:
