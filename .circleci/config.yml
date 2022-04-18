@@ -20,7 +20,8 @@ commands:
 
 jobs:
   build:
-    executor: cimg/node:17.9.0
+    docker:
+      - image: cimg/node:17.9.0
     steps:
       - run: echo "console.log('complete')" | node
       - generatelogs
