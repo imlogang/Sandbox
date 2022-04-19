@@ -1,29 +1,31 @@
 version: 2.1
 
-orbs:
-  win: circleci/windows@4.1
+parameters:
+  run_by_api:
+    type: boolean
+    default: false
 
 jobs:
-  build-docker:
+  regular:
     docker:
-      - image: cimg/node:17.2.0
+      - image: cimg/base:2022.03
     steps:
-      - run: echo "docker image"
-  build-windows:
-    executor: 
-      name: win/default
-      size: "medium"
+      - checkout
+      - run: echo "I was run normally"
+
+  api-job:
+    docker:
+      - image: cimg/base:2022.03
     steps:
-      - run: Write-Host 'hellow, windows.'
-  build-macos:
-    macos:
-      xcode: 12.5.1
-    steps:
-      - run: xcodebuild -version
+      - checkout
+      - run: echo "I was run by API"
 
 workflows:
-  build-docker-workflow:
+  normal:
     jobs:
-      - build-docker
-      - build-windows
-      - build-macos
+      - regular
+
+  api-workflow:
+    when: << pipeline.parameters.run_by_api >> # Without modifying the config, run api-job
+    jobs:
+      - api-job
