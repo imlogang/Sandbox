@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   runner:
     machine: true
-    resource_class: imlogang/medium
+    resource_class: logan/medium
     steps:
       - run: echo "Hi I'm on Runners!"
 
