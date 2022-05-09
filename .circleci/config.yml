@@ -1,25 +1,25 @@
 #version: 2.1
 
-#jobs:
-#  build:
-#    docker: # use the docker executor type; machine and macos executors are also supported
-#      - image: cimg/base:2022.03 # the primary container, where your job's commands are run
-#    steps:
-#      - checkout # check out the code in the project directory
-#      - run: echo "hello world" # run the `echo` command
-#
-#workflows:
-#  build-workflow:
-#    jobs:
-#      - build
-version: 2.1
-workflows:
-  testing:
-    jobs:
-      - runner-test
 jobs:
-  runner-test:
-    machine: true
-    resource_class: logan/support-class
+  build:
+    docker: # use the docker executor type; machine and macos executors are also supported
+      - image: cimg/base:2022.03 # the primary container, where your job's commands are run
     steps:
-      - run: echo "Hi I'm on Runners!"
+      - add_ssh_keys # check out the code in the project directory
+      - run: sudo ls -al ~/.ssh
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
+#version: 2.1
+#workflows:
+#  testing:
+#    jobs:
+#      - runner-test
+#jobs:
+#  runner-test:
+#    machine: true
+#    resource_class: logan/support-class
+#    steps:
+#      - run: echo "Hi I'm on Runners!"
