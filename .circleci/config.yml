@@ -7,7 +7,6 @@ jobs:
     steps:
       - add_ssh_keys # check out the code in the project directory
       - run: sudo ls -al ~/.ssh
-      - run: echo "hello"
 
 workflows:
   build-workflow:
