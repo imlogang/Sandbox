@@ -5,9 +5,9 @@ jobs:
     docker: # use the docker executor type; machine and macos executors are also supported
       - image: cimg/base:2022.03 # the primary container, where your job's commands are run
     steps:
-      - add_ssh_keys # check out the code in the project directory
+      - add_ssh_keys: # check out the code in the project directory
           fingerprints:
-          - 7b:67:a0:77:04:10:62:6b:e7:c0:c9:44:77:d8:96:60
+            - "7b:67:a0:77:04:10:62:6b:e7:c0:c9:44:77:d8:96:60"
       - run: sudo ls -al ~/.ssh
       - run: echo "hello"
 
