@@ -4,7 +4,7 @@ jobs:
   build:
     macos: # use the docker executor type; machine and macos executors are also supported
       xcode: "12.5.1"
-    resource_class: medium  
+    resource_class: macos.x86.medium.gen2
     steps:
       - run: sysctl -n machdep.cpu.brand_string
 
