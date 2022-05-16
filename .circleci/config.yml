@@ -2,11 +2,11 @@ version: 2.1
 
 jobs:
   build:
-    docker: # use the docker executor type; machine and macos executors are also supported
-      - image: cimg/ruby:2.3-browsers # the primary container, where your job's commands are run
+    macos: # use the docker executor type; machine and macos executors are also supported
+      xcode: "12.5.1"
+    resource_class: medium  
     steps:
-      - run: ruby --version
-      - run: node --version
+      - run: sysctl -n machdep.cpu.brand_string
 
 workflows:
   build-workflow:
