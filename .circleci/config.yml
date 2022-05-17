@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: cimg/base:2022.04
     steps:
-      - run: sudo dmidecode -t processor | grep -E '(Core Count|Thread Count)'
+      - run: cat /proc/cpuinfo
 
 
 workflows:
