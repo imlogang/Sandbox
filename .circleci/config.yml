@@ -5,7 +5,6 @@ jobs:
     docker:
       - image: cimg/base:2022.04
     steps:
-      - run: sudo apt-get install dmidecode -y
       - run: sudo dmidecode -t processor | grep -E '(Core Count|Thread Count)'
 
 
