@@ -2,11 +2,10 @@ version: 2.1
 
 jobs:
   build:
-    macos: # use the docker executor type; machine and macos executors are also supported
-      xcode: "12.5.1"
-    resource_class: large
+    docker:
+      - image: cimg/base:2022.04
     steps:
-      - run: sysctl -n machdep.cpu.brand_string
+      - run: lscpu
 
 workflows:
   build-workflow:
