@@ -5,7 +5,9 @@ jobs:
     docker:
       - image: cimg/base:2022.04
     steps:
-      - run: sudo dmidecode -t processor | grep Count
+      - run: sudo apt-get install demidecode -y
+      - run: sudo dmidecode -t processor | grep -E '(Core Count|Thread Count)'
+
 
 workflows:
   build-workflow:
