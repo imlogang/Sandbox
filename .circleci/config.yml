@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: cimg/base:2022.04
     steps:
-      - run: echo nproc --all
+      - run: sudo dmidecode -t processor | grep Count
 
 workflows:
   build-workflow:
