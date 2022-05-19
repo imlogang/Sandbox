@@ -11,7 +11,7 @@ jobs:
   testing:
     executor: python/default
     steps:
-      - python/install-pacakges:
+      - python/install-packages:
           pkg-manager: pip
       - run: pip install speedtest-cli
       - run: python --verison
