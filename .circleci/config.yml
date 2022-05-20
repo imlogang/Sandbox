@@ -13,7 +13,6 @@ workflows:
   build-workflow:
     jobs:
       - build
-      - testing
 
 
 #version: 2.1
