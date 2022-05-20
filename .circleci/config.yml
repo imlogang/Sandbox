@@ -5,7 +5,7 @@ orbs:
 jobs:
   build:
     machine: true
-    resource_class: logan/support-class
+    resource_class: 'logan/support-class'
     steps:
       - run: nproc
 
