@@ -4,15 +4,10 @@ orbs:
 
 jobs:
   build:
-    docker:
-      - image: cimg/base:2022.04
+    machine: true
+    resource_class: logan/support-class
     steps:
       - run: nproc
-  testing:
-    executor: python/default
-    steps:
-      - run: pip install speedtest-cli
-      - run: speedtest-cli
 
 workflows:
   build-workflow:
