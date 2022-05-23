@@ -1,18 +1,22 @@
 version: 2.1
-orbs:
-  python: circleci/python@1.0.0
 
 jobs:
   build:
-    machine: true
-    resource_class: 'logan/support-class'
+    docker: # use the docker executor type; machine and macos executors are also supported
+      - image: cimg/base:2022.03 # the primary container, where your job's commands are run
     steps:
-      - run: nproc
+      - checkout
+      - add_ssh_keys: # check out the code in the project directory
+          fingerprints:
+            - "7b:67:a0:77:04:10:62:6b:e7:c0:c9:44:77:d8:96:60"
+      - run: sudo ls -al ~/.ssh
+      - run: echo "hello"
 
 workflows:
   build-workflow:
     jobs:
       - build
+
 
 
 #version: 2.1
