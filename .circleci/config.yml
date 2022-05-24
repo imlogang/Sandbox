@@ -22,7 +22,7 @@ jobs:
     docker:
       - image: cimg/base:2022.05-22.04
     steps:
-      - run: "This was run via curl"
+      - run: echo "This was run via curl"
 
 #version: 2.1
 # ro
