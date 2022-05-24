@@ -8,6 +8,7 @@ jobs:
     machine:
         image: ubuntu-2004:202111-02
     steps:
+      - run: sudo apt list at
       - run: sudo apt-get update -y && sudo apt-get install at
 
 
