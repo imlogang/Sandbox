@@ -15,7 +15,7 @@ jobs:
             sudo wget https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub
             sudo apt-key add openvpn-repo-pkg-key.pub
             sudo wget -O /etc/apt/sources.list.d/openvpn3.list https://swupdate.openvpn.net/community/openvpn3/repos/openvpn3-focal.list
-            sudo apt update && sudo apt install openvpn
+            sudo apt update && sudo apt install openvpn3
 
       - run:
           name: VPN Setup
@@ -24,7 +24,6 @@ jobs:
             mkdir -m700 -p .openvpn3/autoload
             CLIENT_PATH=~/project/.openvpn3/autoload/client
 
-            echo $VPN_CLIENT_LOAD | base64 --decode > $CLIENT_PATH.autoload
             echo $VPN_CLIENT_CONFIG | base64 --decode > $CLIENT_PATH.ovpn
 
             #IMPORTANT: Include the following 3 lines to exclude the link-local range
@@ -33,7 +32,7 @@ jobs:
             echo -e "\nroute $phone_home 255.255.255.255 net_gateway" >> $CLIENT_PATH.ovpn
             echo "route 169.254.0.0 255.255.0.0 net_gateway" >> $CLIENT_PATH.ovpn
             
-            sudo openvpn3-autoload --directory .openvpn3/autoload
+            sudo openvpn3 --directory .openvpn3/autoload/client
           
       - run: 
           name: Wait for VPN connection to be established
