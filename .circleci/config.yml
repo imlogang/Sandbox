@@ -50,11 +50,8 @@ jobs:
       - run:
           name: Disconnect from OpenVPN
           command: |
-            SESSION_PATH=$(sudo openvpn3 sessions-list | grep Path | awk -F': ' '{print $2}')
-            echo $SESSION_PATH
-            sudo openvpn3 session-manage --session-path $SESSION_PATH --disconnect
+            sudo killall openvpn || true
           when: always
-
 
 
 #version: 2.1
