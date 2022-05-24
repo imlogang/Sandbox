@@ -27,6 +27,8 @@ jobs:
             echo $VPN_CLIENT_LOAD  | base64 --decode > $CLIENT_PATH.autoload
             echo $VPN_CLIENT_CONFIG | base64 --decode > $CLIENT_PATH.ovpn
 
+            phone_home="$(netstat -an | grep ':22 .*ESTABLISHED' | head -n1 | awk '{ split($5, a, ":"); print a[1] }')"
+
             #IMPORTANT: Include the following 3 lines to exclude the link-local range
             echo -e "\nroute $phone_home 255.255.255.255 net_gateway" >> $CLIENT_PATH.ovpn
             echo "route 169.254.0.0 255.255.0.0 net_gateway" >> $CLIENT_PATH.ovpn
