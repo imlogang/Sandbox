@@ -5,13 +5,19 @@ workflows:
       - deploy
 jobs:
   deploy:
-    machine: true
+    docker:
+      - image: cimg/base:2022.05-22.04
     steps:
-      - run: | 
-          sudo apt-get update &&
-          sudo apt-get install at &&
-          sudo systemctl enable --now atd
-
+      - run: echo "this is a test"
+      - command: | 
+              curl -u ${CIRCLE_API_USER_TOKEN}: \
+              -d "build_parameters[CIRCLE_JOB]=testing" \
+              https://app.circleci.com/pipelines/github/imlogang/Sandbox?branch=main&filter=all
+  testing:
+    docker:
+      - image: cimg/base:2022.05-22.04
+    steps:
+      - run: "This was run via curl"
 
 #version: 2.1
 # ro
