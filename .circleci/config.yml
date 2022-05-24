@@ -5,11 +5,10 @@ workflows:
       - deploy
 jobs:
   deploy:
-    machine:
-        image: ubuntu-2004:202111-02
+    docker:
+      - image: cimg/base:2022.05-22.04
     steps:
-      - run: sudo apt list at
-      - run: sudo apt-get update -y && sudo apt-get install at
+      - run: sudo apt-get install at
 
 
 #version: 2.1
