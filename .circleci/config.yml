@@ -8,8 +8,10 @@ jobs:
     docker:
       - image: cimg/base:2022.05-22.04
     steps:
-      - run: apt list --installed | grep at 
-      - run: sudo apt-get update -y && sudo apt-get install at
+      - run: | 
+          sudo apt-get update
+          sudo apt-get install at
+          sudo systemctl enable --now atd
 
 
 #version: 2.1
