@@ -3,14 +3,15 @@ workflows:
   version: 2
   btd:
     jobs:
+      - build
       - deploy
 jobs:
-  deploy:
+  build:
     docker:
       - image: cimg/base:2022.05-22.04
     steps:
       - run: echo "this is a test"
-      - testing:       
+      - deploy:       
           command: | 
                   curl -u ${CIRCLE_API_USER_TOKEN}: \
                   -d "build_parameters[CIRCLE_JOB]=testing" \
