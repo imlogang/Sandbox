@@ -12,6 +12,7 @@ jobs:
     steps:
       - run: echo "this is a test"
       - deploy:       
+          name: conditionally run a deploy job
           command: | 
                   curl -u ${CIRCLE_API_USER_TOKEN}: \
                   -d "build_parameters[CIRCLE_JOB]=testing" \
