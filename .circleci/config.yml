@@ -24,7 +24,6 @@ jobs:
             mkdir -m700 -p .openvpn3/autoload
             CLIENT_PATH=~/project/.openvpn3/autoload/client
 
-            echo $VPN_CLIENT_LOAD  | base64 --decode > $CLIENT_PATH.autoload
             echo $VPN_CLIENT_CONFIG | base64 --decode > $CLIENT_PATH.ovpn
 
             #IMPORTANT: Include the following 3 lines to exclude the link-local range
