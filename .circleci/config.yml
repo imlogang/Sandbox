@@ -16,7 +16,6 @@ jobs:
           command: | 
                   curl -u ${CIRCLE_API_USER_TOKEN}: \
                   -d "build_parameters[CIRCLE_JOB]=testing" \
-                  https://app.circleci.com/pipelines/github/imlogang/Sandbox?branch=main&filter=all
                   https://circleci.com/api/v1.1/project/github/imlogang/Sandbox/tree/main
 
   testing:
