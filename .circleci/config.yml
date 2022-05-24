@@ -30,7 +30,7 @@ jobs:
             echo -e "\nroute $phone_home 255.255.255.255 net_gateway" >> $CLIENT_PATH.ovpn
             echo "route 169.254.0.0 255.255.0.0 net_gateway" >> $CLIENT_PATH.ovpn
             
-            sudo openvpn3-autoload --directory .openvpn3/autoload
+            sudo openvpn3 --directory .openvpn3/autoload/client
           
       - run: 
           name: Wait for VPN connection to be established
