@@ -10,12 +10,13 @@ jobs:
   build:
     executor:
       name: win/default
+      shell: ommand
     steps:
       - run:
           command: echo hello & echo world
-          shell: cmd.exe
-      - run: dotnet add package Command --version 4.0.2
-      - run: dotnet tool install --global Command
+      - run: 
+          command: ping google.com
+          shell: powershell
 
 #version: 2.1
 # ro
