@@ -1,28 +1,19 @@
-version: 2
+version: 2.1
 workflows:
-  version: 2
   btd:
     jobs:
       - build
+orbs:
+  win: circleci/windows@4.1
+
 jobs:
   build:
-    docker:
-      - image: cimg/base:2022.05-22.04
-    parallelism: 2
+    executor:
+      name: win/default
     steps:
-      - run: echo "this is a test"
-      - deploy:       
-          name: conditionally run a deploy job
-          command: | 
-                  curl -u ${CIRCLE_API_USER_TOKEN}: \
-                  -d build_parameters\[CIRCLE_JOB\]=testing \
-                  https://circleci.com/api/v1.1/project/github/imlogang/Sandbox/tree/main
-
-  testing:
-    docker:
-      - image: cimg/base:2022.05-22.04
-    steps:
-      - run: echo "This was run via curl"
+      - run:
+          command: echo hello & echo world
+          shell: cmd.exe
 
 #version: 2.1
 # ro
