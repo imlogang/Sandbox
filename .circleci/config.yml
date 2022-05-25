@@ -10,7 +10,7 @@ jobs:
   build:
     executor:
       name: win/default
-      shell: ommand
+      shell: Command
     steps:
       - run:
           command: echo hello & echo world
