@@ -8,9 +8,8 @@ orbs:
 
 jobs:
   build:
-    executor:
-      name: win/default
-      shell: cmd.exe
+    machine: true
+    resource_class: logan/support-class
     steps:
       - run:
           command: echo hello & echo world
