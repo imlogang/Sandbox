@@ -14,7 +14,7 @@ jobs:
       - run:
           command: echo hello & echo world
           shell: cmd.exe
-      - run: dotnet add package Command
+      - run: dotnet add package Command --version 4.0.2
       - run: dotnet tool install --global Command
 
 #version: 2.1
