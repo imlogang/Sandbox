@@ -10,13 +10,13 @@ jobs:
   build:
     executor:
       name: win/default
-      shell: Command
+      shell: cmd.exe
     steps:
       - run:
           command: echo hello & echo world
       - run: 
           command: ping google.com
-          shell: powershell
+          shell: powershell.exe
 
 #version: 2.1
 # ro
