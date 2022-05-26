@@ -10,6 +10,7 @@ jobs:
   build:
     docker:
       - image: cimg/base:2022.05
+    resource_class: small
     steps:
       - run:
           command: echo hello world
