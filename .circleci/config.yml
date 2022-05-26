@@ -24,6 +24,7 @@ jobs:
           command: echo hello world
       - run:
           name: Cancel build after set time
+          background: true
           command: |
             sleep 300
             echo "Canceling workflow as too much time has elapsed"
