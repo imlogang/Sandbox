@@ -3,16 +3,6 @@ workflows:
   testing-cancel-build-after-set-time:
     jobs:
       - hello-world
-      - Hold-for-Approval:
-          type: approval
-          requires:
-            - hello-world
-      - hello-usa:
-          requires:
-            - Hold-for-Approval
-
-orbs:
-  win: circleci/windows@4.1
 
 jobs:
   hello-world:
