@@ -22,6 +22,13 @@ jobs:
     steps:
       - run:
           command: echo hello world
+      - run:
+          name: Cancel build after set time
+          background: true
+          command: |
+            sleep 300
+            echo "Canceling workflow as too much time has elapsed"
+            curl -X POST --header "Content-Type: application/json" "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel?circle-token=${CIRCLE_TOKEN}" 
   
   hello-usa:
     docker:
@@ -30,13 +37,7 @@ jobs:
     steps:
       - run:
           echo hello usa 
-      - run:
-          name: Cancel build after set time
-          background: true
-          command: |
-            sleep 300
-            echo "Canceling workflow as too much time has elapsed"
-            curl -X POST --header "Content-Type: application/json" "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel?circle-token=${CIRCLE_TOKEN}" 
+
       
 #version: 2.1
 # ro
