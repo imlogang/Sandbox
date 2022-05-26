@@ -18,26 +18,10 @@ jobs:
   hello-world:
     docker:
       - image: cimg/base:2022.05
-    resource_class: small
+    resource_class: medium+
     steps:
       - run:
           command: echo hello world
-      - run:
-          name: Cancel build after set time
-          command: |
-            echo "Starting Timer"
-            sleep 60
-            echo "Canceling workflow as too much time has elapsed"
-            curl -X POST --header "Content-Type: application/json" "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel?circle-token=${CIRCLE_TOKEN}" 
-          background: true
-
-  hello-usa:
-    docker:
-      - image: cimg/base:2022.05
-    resource_class: small
-    steps:
-      - run:
-          echo hello usa 
 
       
 #version: 2.1
