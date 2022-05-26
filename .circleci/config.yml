@@ -2,18 +2,34 @@ version: 2.1
 workflows:
   testing-cancel-build-after-set-time:
     jobs:
-      - build
+      - hello-world
+      - Hold-for-Approval:
+          type: approval
+          requires:
+            - hello-world
+      - hello-usa:
+          requires:
+            - Hold-for-Approval
+
 orbs:
   win: circleci/windows@4.1
 
 jobs:
-  build:
+  hello-world:
     docker:
       - image: cimg/base:2022.05
     resource_class: small
     steps:
       - run:
           command: echo hello world
+  
+  hello-usa:
+    docker:
+      - image: cimg/base:2022.05
+    resource_class: small
+    steps:
+      - run:
+          echo hello usa 
       - run:
           name: Cancel build after set time
           background: true
@@ -21,7 +37,7 @@ jobs:
             sleep 300
             echo "Canceling workflow as too much time has elapsed"
             curl -X POST --header "Content-Type: application/json" "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel?circle-token=${CIRCLE_TOKEN}" 
-
+      
 #version: 2.1
 # ro
 #
