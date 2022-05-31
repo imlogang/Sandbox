@@ -8,10 +8,9 @@ jobs:
   hello-world:
     docker:
       - image: cimg/base:2022.05
-    resource_class: medium+
     steps:
       - run:
-          command: echo hello world
+          command: docker pull gitpod/workspace-node:latest
 
       
 #version: 2.1
