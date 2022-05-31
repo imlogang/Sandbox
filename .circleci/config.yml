@@ -12,7 +12,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
-          command: docker pull revomarine/java16
+          command: docker pull gitpod/workspace-node:latest
 
       
 #version: 2.1
