@@ -3,7 +3,7 @@ workflows:
   docker-image-test:
     jobs:
       - openjdk11
-      - openjdk11_1_0_0
+      - openjdk11_11_0_0
 
 jobs:
   openjdk11:
