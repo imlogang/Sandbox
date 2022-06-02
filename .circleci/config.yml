@@ -1,16 +1,23 @@
 version: 2.1
 workflows:
-  testing-docker-pull:
+  docker-image-test:
     jobs:
-      - hello-world
+      - openjdk11
+      - openjdk11.11.0.0
 
 jobs:
-  hello-world:
+  openjdk11:
     docker:
-      - image: cimg/base:2022.05
+      - image: cimg/openjdk:11-jdk
     steps:
       - run:
           command: echo "hello world"
+  openjdk11.11.0.0:
+    docker: 
+      - image: cimg/openjdk:11.0.0
+    steps:
+      - run: echo "hello world"
+  
 
       
 #version: 2.1
