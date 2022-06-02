@@ -3,7 +3,7 @@ workflows:
   docker-image-test:
     jobs:
       - openjdk11
-      - openjdk11.11.0.0
+      - openjdk11_1_0_0
 
 jobs:
   openjdk11:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - run:
           command: echo "hello world"
-  openjdk11.11.0.0:
+  openjdk11_11_0_0:
     docker: 
       - image: cimg/openjdk:11.0.0
     steps:
