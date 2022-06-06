@@ -10,6 +10,7 @@ jobs:
       - image: cimg/base:2022.06
     steps:
       - run:
+          name: "install homebrew and bundletool"
           command: |
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
             echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/circleci/.profile
@@ -18,6 +19,10 @@ jobs:
             brew install bundletool
             alias bundletool='java -jar bundletool-all.jar'
             bundletool version
+
+      - run:
+          name: "bundletool version"
+          command: bundletool version
 
   
 
