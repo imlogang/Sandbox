@@ -10,18 +10,15 @@ jobs:
       - image: cimg/base:2022.06
     steps:
       - run:
-          name: "install homebrew and bundletool"
+          name: "install brew & version"
           command: |
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
             brew --version
+      - run:
+          name: "bundletool install & version"
+          command: |
             brew install bundletool
             bundletool version
-      - run: brew install openjdk
-      - run: alias bundletool="java -jar bundletool-all.jar"
-
-      - run:
-          name: "bundletool version"
-          command: java -jar bundletool-all.jar version
 
   
 
