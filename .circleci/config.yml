@@ -9,6 +9,9 @@ jobs:
     docker:
       - image: cimg/base:2022.06
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "7b:67:a0:77:04:10:62:6b:e7:c0:c9:44:77:d8:96:60"
       - run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       - run: echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/circleci/.profile
       - run: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
