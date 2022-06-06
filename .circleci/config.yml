@@ -8,15 +8,18 @@ workflows:
 jobs:
   openjdk11:
     docker:
-      - image: cimg/openjdk:11-jdk
+      - image: cimg/base:2022.06
     steps:
       - run:
-          command: echo "hello world"
-  openjdk11_11_0_0:
-    docker: 
-      - image: cimg/openjdk:11.0.0
-    steps:
-      - run: echo "hello world"
+          command: |
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/circleci/.profile
+            eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+            brew --version
+            brew install bundletool
+            alias bundletool='java -jar bundletool-all.jar'
+            bundletool version
+
   
 
       
