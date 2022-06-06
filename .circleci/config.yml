@@ -23,7 +23,7 @@ jobs:
 
       - run:
           name: "bundletool version"
-          command: bundletool version
+          command: java -jar bundletool-all.jar version
 
   
 
