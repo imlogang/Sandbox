@@ -17,8 +17,9 @@ jobs:
             eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
             brew --version
             brew install bundletool
-            alias bundletool='java -jar bundletool-all.jar'
             bundletool version
+
+      - run: alias bundletool="java -jar bundletool-all.jar"
 
       - run:
           name: "bundletool version"
