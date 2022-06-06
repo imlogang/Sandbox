@@ -18,7 +18,7 @@ jobs:
             brew --version
             brew install bundletool
             bundletool version
-
+      - run: brew install openjdk
       - run: alias bundletool="java -jar bundletool-all.jar"
 
       - run:
