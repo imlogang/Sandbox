@@ -1,11 +1,14 @@
 version: 2.1
+orbs:
+  android: circleci/android@1.0.3
+
 workflows:
   docker-image-test:
     jobs:
-      - openjdk11
+      - testing-brew-install
 
 jobs:
-  openjdk11:
+  testing-brew-install:
     docker:
       - image: cimg/android:2021.10.1-ndk
     steps:
