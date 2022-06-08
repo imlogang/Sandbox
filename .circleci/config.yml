@@ -14,8 +14,8 @@ jobs:
     resource_class: arm.medium
     steps:
       - docker/pull:
-          images: futurestandard/scorer-surveillance-db:latest
-      - run: docker image inspect 
+          images: revomarine/java16:latest
+      - run: docker images
 
   
 
