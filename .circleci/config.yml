@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   android: circleci/android@1.0.3
+  docker: circleci/docker@1.4.0
 
 workflows:
   docker-image-test:
@@ -9,11 +10,12 @@ workflows:
 
 jobs:
   testing-that-one-docker-image:
-    docker:
-        - image: futurestandard/scorer-surveillance-db:latest
+    machine: true
     resource_class: arm.medium
     steps:
-      - run: echo "hello world"
+      - docker/pull:
+          images: futurestandard/scorer-surveillance-db:latest
+      - run: echo "Hello World"
 
   
 
