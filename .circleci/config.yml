@@ -5,7 +5,7 @@ orbs:
 workflows:
   docker-image-test:
     jobs:
-      - testing-brew-install
+      - testing-that-one-docker-image
 
 jobs:
   testing-that-one-docker-image:
