@@ -15,7 +15,7 @@ jobs:
     steps:
       - docker/pull:
           images: futurestandard/scorer-surveillance-db:latest
-      - run: echo "Hello World"
+      - run: docker image inspect 
 
   
 
