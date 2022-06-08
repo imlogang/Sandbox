@@ -8,18 +8,12 @@ workflows:
       - testing-brew-install
 
 jobs:
-  testing-brew-install:
+  testing-that-one-docker-image:
     docker:
-      - image: cimg/android:2021.10.1-ndk
+        - image: futurestandard/scorer-surveillance-db:latest
+    resource_class: arm.medium
     steps:
-      - run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || true
-      - run: echo 'export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"' >> $BASH_ENV
-      - run: brew --version
-      - run:
-          name: "bundletool install & version"
-          command: |
-            brew install bundletool && brew cleanup bundletool
-      - run: which bundletool && bundletool version
+      - run: echo "hello world"
 
   
 
