@@ -14,6 +14,7 @@ jobs:
       - image: cimg/ruby:2.4
     steps:
       - run: ruby --version
+      - run: bundle init
       - run: bundle install
 
       
