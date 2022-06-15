@@ -13,11 +13,9 @@ jobs:
     machine:
       docker_layer_caching: true
       image: ubuntu-2004:202107-02
-      resource_class: medium
+      resource_class: large
     steps:
-      - run: ruby --version
-      - run: bundle init
-      - run: bundle install
+      - run: echo "hello world"
 
       
 #version: 2.1
