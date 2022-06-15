@@ -10,8 +10,10 @@ workflows:
 
 jobs:
   testing-that-one-docker-image:
-    docker:
-      - image: cimg/ruby:2.4
+    machine:
+      docker_layer_caching: true
+      image: ubuntu-2004:202107-02
+      resource_class: medium
     steps:
       - run: ruby --version
       - run: bundle init
