@@ -15,7 +15,7 @@ jobs:
       image: ubuntu-2004:202107-02
     resource_class: large
     steps:
-      - run: echo "hello world"
+      - run: echo ${CIRCLECI}
 
       
 #version: 2.1
