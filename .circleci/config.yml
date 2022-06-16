@@ -10,12 +10,11 @@ workflows:
 
 jobs:
   testing-that-one-docker-image:
-    machine:
-      docker_layer_caching: true
-      image: ubuntu-2004:202107-02
+    docker:
+      - image: cimg/node:18.1.0
     resource_class: large
     steps:
-      - run: echo ${CIRCLECI}
+      - run: docker build -t revomarine/testing 
 
       
 #version: 2.1
