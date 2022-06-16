@@ -16,7 +16,6 @@ jobs:
     steps:
       - setup_remote_docker:
           version: 20.10.14
-      - run: docker pull revomarine/testing
       - run: docker build -t revomarine/testing .
 
       
