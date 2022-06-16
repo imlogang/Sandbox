@@ -14,6 +14,7 @@ jobs:
       - image: cimg/node:18.1.0
     resource_class: large
     steps:
+      - checkout
       - setup_remote_docker:
           version: 20.10.14
       - run: docker build -t revomarine/testing .
