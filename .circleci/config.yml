@@ -11,13 +11,11 @@ workflows:
 jobs:
   testing-that-one-docker-image:
     docker:
-      - image: cimg/node:18.1.0
-    resource_class: large
+      - image: cimg/php:8.1-browsers
+    resource_class: medium
     steps:
-      - checkout
-      - setup_remote_docker:
-          version: 20.10.14
-      - run: docker build -t revomarine/testing .
+      - run: sudo apt update 
+      - run: sudo apt-get install php8.1-ldap
 
       
 #version: 2.1
