@@ -8,10 +8,16 @@ workflows:
 jobs:
   gradle-testing:
     docker:
-      - image: cimg/openjdk:8.0.232
+      - image: cimg/openjdk:18.0.1-node
     resource_class: medium
     steps:
       - run: gradle -v
+      - run: wget https://services.gradle.org/distributions/gradle-4.7-all.zip
+      - run: unzip -d /opt/gradle gradle-4.7-all.zip
+      - run: ls /opt/gradle/gradle-4.7
+      - run: export PATH=$PATH:/opt/gradle/gradle-4.7/bin
+      - run: gradle -v
+
       
 #version: 2.1
 # ro
