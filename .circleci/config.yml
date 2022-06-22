@@ -12,7 +12,6 @@ jobs:
       - image: cimg/base:2022.06
     resource_class: medium
     steps:
-      - run: gradle -v
       - run: wget https://services.gradle.org/distributions/gradle-4.7-bin.zip
       - run: sudo rm -R /opt/gradle
       - run: sudo mkdir /opt/gradle
