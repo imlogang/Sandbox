@@ -13,7 +13,7 @@ jobs:
     steps:
       - run: gradle -v
       - run: wget https://services.gradle.org/distributions/gradle-4.7-all.zip
-      - run: unzip -d /opt/gradle gradle-4.7-all.zip
+      - run: sudo unzip -d /opt/gradle gradle-4.7-all.zip
       - run: ls /opt/gradle/gradle-4.7
       - run: export PATH=$PATH:/opt/gradle/gradle-4.7/bin
       - run: gradle -v
