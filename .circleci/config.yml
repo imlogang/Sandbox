@@ -12,7 +12,11 @@ jobs:
     resource_class: medium
     steps:
       - run: gradle -v
-      - run: sdk install gradle 4.7
+      - run: wget https://services.gradle.org/distributions/gradle-4.7-all.zip
+      - run: mkdir /opt/gradle
+      - run: unzip -d /opt/gradle gradle-4.7-all.zip
+      - run: ls /opt/gradle/gradle-4.7
+      - run: export PATH=$PATH:/opt/gradle/gradle-4.7/bin
       - run: gradle -v
 
       
