@@ -8,7 +8,8 @@ workflows:
 jobs:
   gradle-testing:
     docker:
-      - image: cimg/openjdk:18.0.1-node
+     # - image: cimg/openjdk:18.0.1-node
+      - image: cimg/base:2022.06
     resource_class: medium
     steps:
       - run: gradle -v
