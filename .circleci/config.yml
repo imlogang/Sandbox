@@ -11,8 +11,9 @@ jobs:
       - image: cimg/php:8.1-browsers
     resource_class: medium
     steps:
-      - run: sudo apt-get update 
-      - run: sudo apt-get install php8.0-ldap
+      - run: sudo apt-get update && sudo apt install software-properties-common
+      - run: sudo add-apt-repository ppa:ondrej/php
+      - run: sudo apt-get install php8.1-ldap
 
       
 #version: 2.1
