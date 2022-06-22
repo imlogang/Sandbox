@@ -18,7 +18,7 @@ jobs:
       - run: sudo unzip -d /opt/gradle gradle-4.7-all.zip
       - run: ls /opt/gradle/gradle-4.7
       - run: export PATH=$PATH:/opt/gradle/gradle-4.7/bin
-      - run: gradle4.7 -v
+      - run: gradle -v
 
       
 #version: 2.1
