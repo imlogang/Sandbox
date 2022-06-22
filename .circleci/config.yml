@@ -1,19 +1,19 @@
 version: 2.1
 
 workflows:
-  php-testing:
+  gradle-testing:
     jobs:
-      - php-ldap
+      - gradle-testing
 
 jobs:
-  php-ldap:
+  gradle-testing:
     docker:
-      - image: cimg/php:8.1-browsers
+      - image: cimg/openjdk::8.0.322-node
     resource_class: medium
     steps:
-      - run: sudo apt-get update && sudo apt install software-properties-common
-      - run: sudo add-apt-repository ppa:ondrej/php
-      - run: sudo apt-get install php8.1-ldap
+      - run: gradle -v
+      - run: sdk install gradle 4.7
+      - run: gradle -v
 
       
 #version: 2.1
