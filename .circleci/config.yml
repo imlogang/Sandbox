@@ -1,21 +1,18 @@
 version: 2.1
-orbs:
-  android: circleci/android@1.0.3
-  docker: circleci/docker@1.4.0
 
 workflows:
-  docker-image-test:
+  php-testing:
     jobs:
-      - testing-that-one-docker-image
+      - php-ldap
 
 jobs:
-  testing-that-one-docker-image:
+  php-ldap:
     docker:
       - image: cimg/php:8.1-browsers
     resource_class: medium
     steps:
-      - run: sudo apt update 
-      - run: sudo apt install php8.1-ldap
+      - run: sudo apt-get update 
+      - run: sudo apt-get install php8.0-ldap
 
       
 #version: 2.1
