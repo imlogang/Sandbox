@@ -16,7 +16,7 @@ jobs:
     steps:
       - run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       - run: brew install pyenv
-      - run: pynev -v
+      - run: pyenv -v
 
       
 #version: 2.1
