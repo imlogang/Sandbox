@@ -39,9 +39,7 @@ jobs:
             pyenv root
       - run: 
           name: checking shims
-          command: |
-            eval "$(pyenv init --path)"
-            pyenv shell 3.3.3
+          command: pyenv shell 3.3.3
 
       
 #version: 2.1
