@@ -16,7 +16,19 @@ jobs:
     steps:
       - run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       - run: brew install pyenv
-      - run: pyenv -v
+      - run:
+          name: validate pyenv installation
+          command: |
+            set -x
+            echo "Validating pyenv installation"
+            if ! command -v pyenv; then
+              echo "pyenv installation failed."
+              exit 1
+            fi
+            
+            echo "pyenv installation successful"
+            pyenv versions
+            pyenv root
 
       
 #version: 2.1
