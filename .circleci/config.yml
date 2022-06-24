@@ -48,7 +48,9 @@ jobs:
           command: pyenv versions
       - run:
           name: pyenv 3.10 shell
-          command: pyenv shell 3.10.0
+          command: | 
+            eval "$(pyenv init -)"
+            pyenv shell 3.10.0
       
 #version: 2.1
 # ro
