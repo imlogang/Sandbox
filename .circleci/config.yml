@@ -15,7 +15,7 @@ jobs:
     resource_class: medium
     steps:
       - run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      - run: brew install pyenv
+      - run: brew install pyenv openssl readline sqlite3 xz zlib tcl-tk
       - run:
           name: validate pyenv installation
           command: |
