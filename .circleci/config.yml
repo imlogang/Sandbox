@@ -19,10 +19,7 @@ jobs:
       - run:
           name: echoing all that fun stuff
           command: |
-            echo "Adding pyenv to BASH_ENV"
-            echo 'export PYENV_ROOT="$HOME/.pyenv"'
-            echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> $BASH_ENV
-            echo 'eval "$(pyenv init -)"'
+            echo "skip"
 
       - run:
           name: validate pyenv installation
