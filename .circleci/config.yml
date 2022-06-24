@@ -39,11 +39,16 @@ jobs:
             pyenv versions
             pyenv root
       - run: 
-          name: checking shims
+          name: installing python version 3.10
           command: |
             eval "$(pyenv init -)"
-            pyenv shell shims
-
+            pyenv install 3.10
+      - run: 
+          name: validaiting 3.10 install
+          command: pyenv versions
+      - run:
+          name: pyenv 3.10 shell
+          command: pyenv shell 3.10
       
 #version: 2.1
 # ro
