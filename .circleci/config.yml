@@ -22,6 +22,7 @@ jobs:
             echo "Adding pyenv to BASH_ENV"
             echo 'export PYENV_ROOT="$HOME/.pyenv"' >>$BASH_ENV
             echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >>$BASH_ENV
+            
             echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bash_profile
 
       - run:
@@ -40,7 +41,7 @@ jobs:
       - run: 
           name: checking shims
           command: |
-          eval $(pyenv init --path)
+          eval "$(pyenv init --path)"
           pyenv shell shims
 
       
