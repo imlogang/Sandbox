@@ -19,9 +19,12 @@ jobs:
       - run:
           name: echoing all that fun stuff
           command: |
+            export PYENV_ROOT="$HOME/.pyenv"
+            command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
             echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
             echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
             echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+            eval "$(pyenv init -)"
 
       - run:
           name: validate pyenv installation
@@ -38,7 +41,7 @@ jobs:
             pyenv root
       - run: 
           name: checking shims
-          command: pyenv init
+          command: pyenv shell 3.3.3
 
       
 #version: 2.1
