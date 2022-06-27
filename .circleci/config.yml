@@ -9,7 +9,6 @@ jobs:
   pynev-test:
     macos:
       xcode: 13.4.1
-    shell: eval "$(pyenv init -)"
     #docker:
      # - image: cimg/openjdk:18.0.1-node
      # - image: cimg/base:2022.06
@@ -42,6 +41,7 @@ jobs:
       - run: 
           name: installing python version 3.10
           command: |
+            eval "$(pyenv init -)"
             pyenv install 3.10.0
       - run: 
           name: validaiting 3.10.0 install
@@ -49,8 +49,7 @@ jobs:
       - run:
           name: pyenv 3.10 shell
           command: | 
-            eval "$(pyenv init -)"
-            pyenv shell 3.10.0
+            pyenv local 3.10.0
             python3 --version
       - run: 
           name: testing shims
