@@ -49,6 +49,7 @@ jobs:
       - run:
           name: pyenv 3.10 shell
           command: | 
+            eval "$(pyenv init -)"
             pyenv local 3.10.0
             python3 --version
       - run: 
