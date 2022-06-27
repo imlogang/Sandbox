@@ -41,15 +41,20 @@ jobs:
       - run: 
           name: installing python version 3.10
           command: |
-            eval "$(pyenv init -)"
             pyenv install 3.10.0
+            pyenv install 3.10.4
       - run: 
           name: validaiting 3.10.0 install
           command: pyenv versions
       - run:
-          name: pyenv 3.10 shell
+          name: pyenv 3.10.0 shell
           command: | 
             pyenv local 3.10.0
+            python3 --version
+      - run: 
+          name: pyenv 3.10.4
+          command: |
+            pyenv local 3.10.4
             python3 --version
       - run: 
           name: testing shims
