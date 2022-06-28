@@ -15,8 +15,8 @@ jobs:
     resource_class: medium
     steps:
       # - run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      - run: sudo apt-get install-php-extensions
-      - run: sudo apt-get install docker-php-ext-enable
+      - run: install-php-extensions
+      - run: docker-php-ext-enable
 
       
 #version: 2.1
