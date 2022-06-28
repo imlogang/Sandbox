@@ -10,11 +10,13 @@ jobs:
     docker:
      # - image: cimg/openjdk:18.0.1-node
      # - image: cimg/base:2022.06
-      - image: cimg/python:3.10
+     # - image: cimg/python:3.10
+      - image: cimg/php:7.4.26-browsers
     resource_class: medium
     steps:
       # - run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      - run: python --version
+      - run: sudo install-php-extensions
+      - run: sudo install docker-php-ext-enable
 
       
 #version: 2.1
