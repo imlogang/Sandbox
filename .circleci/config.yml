@@ -1,12 +1,12 @@
 version: 2.1
 
 workflows:
-  python-version:
+  php-testing:
     jobs:
-      - python
+      - php
 
 jobs:
-  python:
+  php:
     docker:
      # - image: cimg/openjdk:18.0.1-node
      # - image: cimg/base:2022.06
@@ -15,8 +15,8 @@ jobs:
     resource_class: medium
     steps:
       # - run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      - run: sudo install-php-extensions
-      - run: sudo install docker-php-ext-enable
+      - run: sudo apt-get install-php-extensions
+      - run: sudo apt-get install docker-php-ext-enable
 
       
 #version: 2.1
