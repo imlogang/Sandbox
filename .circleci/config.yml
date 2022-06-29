@@ -1,19 +1,19 @@
 version: 2.1
 
 workflows:
-  checkout-speed-test:
+  testing-ssh:
     jobs:
-      - checkout-speed
+      - testing-ssh
 
 jobs:
-  checkout-speed:
-    macos:
-      xcode: 13.4.0
-    #docker:
+  testing-ssh:
+    # macos:
+    #   xcode: 13.4.0
+    docker:
      # - image: cimg/openjdk:18.0.1-node
-     # - image: cimg/base:2022.06
+      - image: cimg/base:2022.06
     resource_class: medium
-    shell: /bin/bash --login -eo pipefail
+    # shell: /bin/bash --login -eo pipefail
     steps:
         - checkout
         - run: echo "testing"
