@@ -8,7 +8,7 @@ workflows:
 jobs:
   checkout-speed:
     macos:
-      xcode: 13.4.1
+      xcode: 13.4.0
     #docker:
      # - image: cimg/openjdk:18.0.1-node
      # - image: cimg/base:2022.06
