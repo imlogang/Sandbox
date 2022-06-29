@@ -15,6 +15,9 @@ jobs:
     resource_class: medium
     # shell: /bin/bash --login -eo pipefail
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "69:07:c3:f6:b2:8f:32:51:e8:d1:a3:4b:8c:e9:d3:86"
         - checkout
         - run: echo "testing"
       # - run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
