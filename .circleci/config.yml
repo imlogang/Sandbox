@@ -32,7 +32,7 @@ jobs:
           fingerprints:
             - "31:85:b5:72:11:40:47:0b:af:a3:81:8f:3a:50:f4:04"
       - run:
-          name: Deploy Over SSHs
+          name: Deploy Over SSH
           command: |
             ssh-keyscan -H green-liveconsole22 >> ~/.ssh/known_hosts
             ssh $SSH_USER@$SSH_HOST "cd automating-flask-deployments-with-pythonanywhere; git pull";
