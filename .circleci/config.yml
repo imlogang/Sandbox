@@ -27,11 +27,10 @@ jobs:
     docker:
       - image: cimg/python:3.9
     steps:
-      - checkout
       - add_ssh_keys:
           fingerprints:
             - "31:85:b5:72:11:40:47:0b:af:a3:81:8f:3a:50:f4:04"
       - run: ssh-keyscan -H ssh.pythonanywhere.com >> ~/.ssh/known_hosts
       - run:
           name: Deploy Over SSH
-          command: ssh -i ~/.ssh/id_rsa imlogang@ssh.pythonanywhere.com "cd automating-flask-deployments-with-pythonanywhere; git pull";
+          command: ssh -i imlogang@ssh.pythonanywhere.com "cd automating-flask-deployments-with-pythonanywhere; git pull";
