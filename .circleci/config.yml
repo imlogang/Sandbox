@@ -34,4 +34,4 @@ jobs:
       - run: ssh-keyscan -H ssh.pythonanywhere.com >> ~/.ssh/known_hosts
       - run:
           name: Deploy Over SSH
-          command: ssh $SSH_USER@$SSH_HOST "cd automating-flask-deployments-with-pythonanywhere; git pull";
+          command: ssh imlogang@ssh.pythonanywhere.com "cd automating-flask-deployments-with-pythonanywhere; git pull";
