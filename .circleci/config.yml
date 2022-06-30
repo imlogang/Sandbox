@@ -1,17 +1,38 @@
 version: 2.1
-
-jobs:
-  build:
-    docker:
-      - image: fmidev/smartmet-cibase-8:latest
-    steps:
-      - checkout
-      - run: echo "test"
+orbs:
+  python: circleci/python@1.2
 
 workflows:
-  workflow1:
+  build-app-with-test:
     jobs:
-      - build
-
-      
-
+      - build-and-test
+      - deploy:
+          requires:
+            - build-and-test
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/python:3.9
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            pipenv --three
+            pipenv install
+      - run:
+          name: Run tests
+          command: pipenv run pytest
+  deploy:
+    docker:
+      - image: cimg/python:3.9
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "31:85:b5:72:11:40:47:0b:af:a3:81:8f:3a:50:f4:04"
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh-keyscan -H green-liveconsole22 >> ~/.ssh/known_hosts
+            ssh $SSH_USER@$SSH_HOST "cd automating-flask-deployments-with-pythonanywhere; git pull";
