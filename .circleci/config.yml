@@ -20,7 +20,7 @@ jobs:
           name: Install dependencies
           command: |
             pipenv --three
-            pipenv install
+            pipenv install pipfile
       - run:
           name: Run tests
           command: pipenv run pytest
