@@ -23,7 +23,9 @@ jobs:
             pipenv install 
       - run:
           name: Run tests
-          command: pipenv run pytest
+          command: |
+            cd ~/project/automating-flask-deployments-with-pythonanywhere/tests
+            pipenv run pytest
   deploy:
     docker:
       - image: cimg/python:3.9
