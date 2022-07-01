@@ -39,5 +39,6 @@ jobs:
           name: Deploy Over SSH
           command: |
             ssh-keyscan -H ssh.pythonanywhere.com >> ~/.ssh/known_hosts 
-            ssh -v imlogang@ssh.pythonanywhere.com -i pythonanywhere "cd automating-flask-deployments-with-pythonanywhere; git pull"
+            cd ~/project/pythonanywhere
+            ssh -v imlogang@ssh.pythonanywhere.com "cd automating-flask-deployments-with-pythonanywhere; git pull"
    
