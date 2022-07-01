@@ -13,12 +13,13 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/python:3.9
-    working_directory: ~/project/automating-flask-deployments-with-pythonanywhere
+    #working_directory: ~/automating-flask-deployments-with-pythonanywhere
     steps:
       - checkout
       - run:
           name: Install dependencies
           command: |
+            cd ~/automating-flask-deployments-with-pythonanywhere
             pipenv --three
             pipenv install
       - run:
