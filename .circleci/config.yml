@@ -8,13 +8,13 @@ workflows:
 jobs:
   testing-php-stuff:
     docker:
-      - image: circleci/php:7.2-stretch-node-browsers
+      - image: cimg/php:8.1.7-browsers
     resource_class: medium
     steps:
       - run:
           name: install php 
           command: |
             sudo apt-get update -y
-            sudo rm -rf /var/lib/apt/lists/ && sudo apt update
+            sudo apt update
             sudo apt-get install libfreetype6-dev libjpeg62-turbo-dev_1.5.1-2+deb9u2_amd64.deb libpng-dev && sudo docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && sudo docker-php-ext-install -j$(nproc) gd
    
