@@ -15,5 +15,5 @@ jobs:
           name: install php 
           command: |
             sudo apt-get update -y
-            sudo apt-get install libfreetype6-dev libpng-dev && sudo docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && sudo docker-php-ext-install -j$(nproc) gd
+            sudo apt-get install libfreetype6-dev libpng-dev && sudo docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && sudo docker-php-ext-install -j$(nproc) gd
    
