@@ -20,11 +20,10 @@ jobs:
           name: Install dependencies
           command: |
             pipenv --three
-            pipenv install 
       - run:
           name: Run tests
           command: |
-            pipenv shell
+            pipenv install
             pipenv run pytest
   deploy:
     docker:
