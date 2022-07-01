@@ -20,11 +20,11 @@ jobs:
           name: Install dependencies
           command: |
             pipenv --three
+            pipenv install 
       - run:
           name: Run tests
           command: |
-            pipenv install
-            pipenv run pytest
+            pipenv run pytest /pythonanywhere/tests
   deploy:
     docker:
       - image: cimg/python:3.9
