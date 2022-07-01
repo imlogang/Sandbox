@@ -13,7 +13,7 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/python:3.9
-    working_directory: ~/automating-flask-deployments-with-pythonanywhere
+    working_directory: ~/project
     steps:
       - checkout
       - run:
@@ -23,9 +23,7 @@ jobs:
             pipenv install 
       - run:
           name: Run tests
-          command: |
-            cd automating-flask-deployments-with-pythonanywhere
-            pipenv run pytest
+          command: pipenv run pytest
   deploy:
     docker:
       - image: cimg/python:3.9
