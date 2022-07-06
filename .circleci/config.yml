@@ -5,10 +5,7 @@ orbs:
 workflows:
   build-app-with-test:
     jobs:
-      - build-and-test
-      - deploy:
-          requires:
-            - build-and-test
+      - build-and-test-and-deploy
 jobs:
   build-and-test:
     docker:
@@ -21,17 +18,12 @@ jobs:
           command: |
             cd pythonanywhere
             pipenv --three
-            pipenv install 
+            pipenv install
       - run:
           name: Run tests
           command: |
             cd ~/project/pythonanywhere
-            pipenv run pytest 
-  deploy:
-    docker:
-      - image: cimg/python:3.9
-    steps:
-      - checkout
+            pipenv run pytest
       - add_ssh_keys:
           fingerprints:
             - "31:85:b5:72:11:40:47:0b:af:a3:81:8f:3a:50:f4:04"
@@ -41,4 +33,17 @@ jobs:
             ssh-keyscan -H ssh.pythonanywhere.com >> ~/.ssh/known_hosts 
             cd ~/project/pythonanywhere
             ssh imlogang@ssh.pythonanywhere.com "cd automating-flask-deployments-with-pythonanywhere; git pull"
-   
+  # deploy:
+  #   docker:
+  #     - image: cimg/python:3.9
+  #   steps:
+  #     - checkout
+  #     - add_ssh_keys:
+  #         fingerprints:
+  #           - "31:85:b5:72:11:40:47:0b:af:a3:81:8f:3a:50:f4:04"
+  #     - run:
+  #         name: Deploy Over SSH
+  #         command: |
+  #           ssh-keyscan -H ssh.pythonanywhere.com >> ~/.ssh/known_hosts
+  #           cd ~/project/pythonanywhere
+  #           ssh imlogang@ssh.pythonanywhere.com "cd automating-flask-deployments-with-pythonanywhere; git pull"
