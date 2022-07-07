@@ -6,8 +6,6 @@ from datetime import datetime, timedelta
 from library.main import db, app
 from library.models import BookModel, User, token_required
 
-app = Flask(__name__)
-
 @app.route('/')
 def index():
     return "Hi World"
