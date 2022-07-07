@@ -19,7 +19,7 @@ def getLoginToken(self):
 
 class TestAuth(unittest.TestCase):
     """"Testcase for blueprint for authentication
-    "" Will create a user in the db and drop it after test execution
+    "" 1Will create a user in the db and drop it after test execution
     """
 
     def setUp(self):
