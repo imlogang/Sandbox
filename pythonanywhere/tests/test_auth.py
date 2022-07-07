@@ -4,7 +4,7 @@ import json
 import ast
 
 from werkzeug.wrappers.response import Response
-from library.main import app, db
+from pythonanywhere.library.main import app, db
 from pythonanywhere.config.config import app_config
 
 def getLoginToken(self):
