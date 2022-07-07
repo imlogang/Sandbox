@@ -5,7 +5,7 @@ import ast
 
 from werkzeug.wrappers.response import Response
 from pythonanywhere.library.main import app, db
-from pythonanywhere.config.config import app_config
+from config.config import app_config
 
 def getLoginToken(self):
         """"Method to get a login token
