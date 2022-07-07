@@ -6,6 +6,9 @@ from datetime import datetime, timedelta
 from library.main import db, app
 from library.models import BookModel, User, token_required
 
+@app.route('/')
+def index():
+    return "Hi World"
 
 # register route
 @app.route('/signup', methods=['POST']) 
