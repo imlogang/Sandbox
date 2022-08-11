@@ -14,7 +14,7 @@ jobs:
     executor: my-executor
     steps:
       - run: mkdir -p workspace
-      - run: echo "Hello, world!" > workspace/echo-output
+      - run: echo "Hello, world!" > echo-output
 
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
       - persist_to_workspace:
@@ -23,14 +23,14 @@ jobs:
           root: .
           # Must be relative path from root
           paths:
-            - .
+            - compile
 
   downstream:
     executor: my-executor
     steps:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: .
+          at: compile
 
       - run: |
           if [[ `cat echo-output` == "Hello, world!" ]]; then
