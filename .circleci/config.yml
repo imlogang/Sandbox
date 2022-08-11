@@ -23,14 +23,14 @@ jobs:
           root: .
           # Must be relative path from root
           paths:
-            - workspace/echo-output
+            - /workspace/echo-output
 
   downstream:
     executor: my-executor
     steps:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: workspace/echo-output
+          at: /workspace/echo-output
 
       - run: |
           if [[ `cat workspace/echo-output` == "Hello, world!" ]]; then
