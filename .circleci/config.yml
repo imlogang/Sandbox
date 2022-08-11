@@ -1,78 +1,48 @@
 version: 2.1
 
-workflows:
-  testing-ssh:
-    jobs:
-      - testing-ssh
+executors:
+  my-executor:
+    docker:
+      - image: buildpack-deps:jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: /tmp
 
 jobs:
-  testing-ssh:
-    # macos:
-    #   xcode: 13.4.0
-    docker:
-     # - image: cimg/openjdk:18.0.1-node
-      - image: cimg/base:2022.06
-    resource_class: medium
-    # shell: /bin/bash --login -eo pipefail
+  flow:
+    executor: my-executor
     steps:
-        - checkout
-        - run: echo "testing"
-      # - run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      # - run: HOMEBREW_NO_AUTO_UPDATE=1 brew install pyenv openssl readline sqlite3 xz zlib tcl-tk
-      # - run:
-      #     name: echo to ~/.bash_profile
-      #     command: |
-      #       echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
-      #       echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
-      #       echo 'eval "$(pyenv init --path)"' >> ~/.bash_profile
-      # - run:
-      #     name: validate pyenv installation
-      #     command: |
-      #       set -x
-      #       echo "Validating pyenv installation"
-      #       if ! command -v pyenv; then
-      #         echo "pyenv installation failed."
-      #         exit 1
-      #       fi
-      #       echo "pyenv installation successful"
-      #       pyenv versions
-      #       pyenv root
-      # - run: 
-      #     name: installing python version 3.10
-      #     command: |
-      #       pyenv install 3.10.0
-      #       pyenv install 3.10.4
-      # - run: 
-      #     name: validaiting 3.10.0 install
-      #     command: pyenv versions
-      # - run:
-      #     name: pyenv 3.10.0 shell
-      #     command: | 
-      #       pyenv local 3.10.0
-      #       python3 --version
-      # - run: 
-      #     name: pyenv 3.10.4
-      #     command: |
-      #       pyenv local 3.10.4
-      #       python3 --version
-      # - run:
-      #     name: testing what python version is set
-      #     command: python3 --version
-      # - run: 
-      #     name: testing shims
-      #     command: pyenv shims
-      
-#version: 2.1
-# ro
-#
-#jobs:
-#  runner:
-#    machine: true
-#    resource_class: logan/medium
-#    steps:
-#      - run: echo "Hi I'm on Runners!"
-#
-#workflows:
-#  testing:
-#    jobs:
-#      - runner
+      - run: mkdir -p workspace
+      - run: echo "Hello, world!" > workspace/echo-output
+
+      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: workspace
+          # Must be relative path from root
+          paths:
+            - echo-output
+
+  downstream:
+    executor: my-executor
+    steps:
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+
+      - run: |
+          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
+            echo "It worked!";
+          else
+            echo "Nope!"; exit 1
+          fi
+
+workflows:
+  btd:
+    jobs:
+      - flow
+      - downstream:
+          requires:
+            - flow
