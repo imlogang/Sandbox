@@ -14,7 +14,10 @@ jobs:
     executor: my-executor
     steps:
       - run: mkdir -p workspace
+      - run: mkdir -p simm-activepivot/target/classes
       - run: echo "Hello, world!" > workspace/echo-output
+      - run: echo "Hello, world!" > simm-activepivot/target/classes
+
 
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
       - persist_to_workspace:
@@ -23,14 +26,16 @@ jobs:
           root: .
           # Must be relative path from root
           paths:
-            - workspace
+            - workspace/*
+            - simm-activepivot/target/classes
 
   downstream:
     executor: my-executor
     steps:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: workspace
+          at: .
+      - run: ls simm-activepivot/target/classes
 
       - run: |
           if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
@@ -38,6 +43,8 @@ jobs:
           else
             echo "Nope!"; exit 1
           fi
+
+          
 
 workflows:
   btd:
