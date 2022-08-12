@@ -16,7 +16,7 @@ jobs:
       - run: mkdir -p workspace
       - run: mkdir -p simm-activepivot/target/classes
       - run: echo "Hello, world!" > workspace/echo-output
-      - run: echo "Hello, world!" > simm-activepivot/target/classes
+      - run: echo "Hello, world!" > simm-activepivot/target/classes/test.txt
 
 
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
