@@ -1,11 +1,21 @@
 version: 2.1
-workflows:
-  testing:
-    jobs:
-      - runner-test
+
+default_test_steps: &default_test_steps
+  docker:
+    - image: circleci/node:14-browsers
+  steps:
+    - checkout
+    - run: npm ci
+
 jobs:
-  runner-test:
-    machine: true
-    resource_class: logan/docker
+  test_1:
+    <<: *default_test_steps
     steps:
-      - run: echo "Hi I'm on Runners!"
+        npx percy exec -- npm run test
+
+
+workflows:
+  version: 2.1
+  test_and_release:
+    jobs:
+      - test_1
