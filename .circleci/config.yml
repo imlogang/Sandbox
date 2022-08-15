@@ -8,14 +8,13 @@ default_test_steps: &default_test_steps
     - run: npm ci
 
 jobs:
-  test_1:
+  test-1:
     <<: *default_test_steps
     steps:
         npx percy exec -- npm run test
 
 
 workflows:
-  version: 2.1
   test_and_release:
     jobs:
-      - test_1
+      - test-1
