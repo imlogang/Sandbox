@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 commands:
  setup-python-dependencies:
    description: Setup the python environment for testing and linting
@@ -38,11 +38,11 @@ jobs:
     - run: poetry run dbt test --models state:modified --defer --state ~/project --exclude tag:skip-ci --project-dir resources
 
 workflows:
-  version: 2
   commit:
-    - dbt-build-ci:
-        context: dbt-ci-cd
-        filters:
+    jobs:
+      - dbt-build-ci:
+          context: dbt-ci-cd
+          filters:
             branches:
               ignore:
                 - master
