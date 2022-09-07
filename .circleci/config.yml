@@ -1,20 +1,48 @@
-version: 2.1
-
-default_test_steps: &default_test_steps
-  docker:
-    - image: circleci/node:14-browsers
-  steps:
-    - checkout
-    - run: npm ci
+version: 2
+commands:
+ setup-python-dependencies:
+   description: Setup the python environment for testing and linting
+   steps:
+     - checkout:
+         path: ~/project
+     - restore_cache:
+         keys:
+           - v1-poetry-cache-{{ arch }}-{{ .Branch }}-{{ checksum "poetry.lock" }}
+           - v1-poetry-cache-{{ arch }}-{{ .Branch }}
+           - v1-poetry-cache
+     - run: echo "export PATH=$HOME/.poetry/bin:$PATH" >> $BASH_ENV
+     - run: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+     - run: poetry install
+     - save_cache:
+         key: v1-poetry-cache-{{ arch }}-{{ .Branch }}-{{ checksum "poetry.lock" }}
+         paths: /virtualenvs
 
 jobs:
-  test-1:
-    <<: *default_test_steps
+  dbt-build-ci:
+    executor: python
     steps:
-        npx percy exec -- npm run test
-
+    - setup-python-dependencies
+    - run: poetry run dbt deps --project-dir resources
+    - run:
+        name: compile dbt manifest in master branch
+        # use --target prod so the --defer will work correctly
+        command: |
+            git checkout master
+            poetry run dbt debug --project-dir resources --target prod
+            poetry run dbt compile --project-dir resources --target prod
+            mv resources/target/manifest.json .
+    - run: git checkout ${CIRCLE_BRANCH}
+    # separate run and test because "dbt build" will fail all downstream if upstream tests fail. We still want to see all tests results if the test failure is from production
+    # currently there is a version bug with state:modified.body, we will add state:modified.body back once we update dbt to be 1.0.4;
+    - run: poetry run dbt run --models state:modified --defer --state ~/project --exclude tag:skip-ci --project-dir resources -x
+    - run: poetry run dbt test --models state:modified --defer --state ~/project --exclude tag:skip-ci --project-dir resources
 
 workflows:
-  test_and_release:
-    jobs:
-      - test-1
+  version: 2
+  commit:
+    - dbt-build-ci:
+        context: dbt-ci-cd
+        filters:
+            branches:
+              ignore:
+                - master
