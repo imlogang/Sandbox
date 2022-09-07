@@ -15,7 +15,8 @@ commands:
      - run: poetry install
      - save_cache:
          key: v1-poetry-cache-{{ arch }}-{{ .Branch }}-{{ checksum "poetry.lock" }}
-         paths: /virtualenvs
+         paths: 
+            - /virtualenvs
 
 jobs:
   dbt-build-ci:
