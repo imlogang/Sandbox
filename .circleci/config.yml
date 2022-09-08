@@ -5,18 +5,9 @@ commands:
    steps:
      - checkout:
          path: ~/project
-     - restore_cache:
-         keys:
-           - v1-poetry-cache-{{ arch }}-{{ .Branch }}-{{ checksum "poetry.lock" }}
-           - v1-poetry-cache-{{ arch }}-{{ .Branch }}
-           - v1-poetry-cache
      - run: echo "export PATH=$HOME/.poetry/bin:$PATH" >> $BASH_ENV
      - run: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
      - run: poetry install
-     - save_cache:
-         key: v1-poetry-cache-{{ arch }}-{{ .Branch }}-{{ checksum "poetry.lock" }}
-         paths: 
-            - /virtualenvs
 
 jobs:
   dbt-build-ci:
