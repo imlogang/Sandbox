@@ -6,7 +6,7 @@ commands:
      - checkout:
          path: ~/project
      - run: echo "export PATH=$HOME/.poetry/bin:$PATH" >> $BASH_ENV
-     - run: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+     - run: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python 
      - run: poetry install
 
 jobs:
