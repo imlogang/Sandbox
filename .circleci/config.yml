@@ -5,7 +5,7 @@ commands:
    steps:
      - checkout:
          path: ~/project
-     #- run: echo "export PATH=$HOME/.poetry/bin:$PATH" >> $BASH_ENV
+     - run: echo "export PATH=$HOME/.poetry/bin:$PATH" >> $BASH_ENV
      - run: curl -sSL https://install.python-poetry.org | python3 -
      - run: poetry install
 
