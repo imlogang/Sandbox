@@ -14,25 +14,25 @@ jobs:
       #- run: sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" rails
       - setup_remote_docker:
           docker_layer_caching: false
-      - run: sudo docker exec –it rails /bin/bash
+      - run: docker exec –it rails /bin/bash
       - run: ssh root@rails
 
-  build-docker-file:
-    docker:
-      - image: cimg/base:current
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run: docker build . -t revomarine/new_rails
-      - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-      - run: docker push revomarine/new_rails
+  # build-docker-file:
+  #   docker:
+  #     - image: cimg/base:current
+  #   steps:
+  #     - checkout
+  #     - setup_remote_docker:
+  #         docker_layer_caching: true
+  #     - run: docker build . -t revomarine/new_rails
+  #     - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+  #     - run: docker push revomarine/new_rails
 
 
 workflows:
   commit:
     jobs:
-      - build-docker-file
-      - dbt-build-ci:
-          requires:
-          - build-docker-file
+      # - build-docker-file
+      - dbt-build-ci
+          # requires:
+          # - build-docker-file
