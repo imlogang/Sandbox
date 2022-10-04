@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       #- run: sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" rails
-      - run: ssh circleci@rails
+      - run: ssh root@rails
 
   build-docker-file:
     docker:
