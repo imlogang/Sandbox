@@ -15,8 +15,8 @@ jobs:
       #- run: sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" rails
       - setup_remote_docker:
           docker_layer_caching: false
-      - run: ssh -o StrictHostKeyChecking=no sshuser@rails 
-      
+      - run: ssh -i for_docker_stuff -o StrictHostKeyChecking=no sshuser@rails 
+
   build-docker-file:
     docker:
       - image: cimg/base:current
