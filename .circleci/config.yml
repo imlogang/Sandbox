@@ -7,14 +7,14 @@ jobs:
         - image: revomarine/new_rails
           name: custom_rails
           environment:
-            RAILS_PORT: 22
+            RAILS_PORT: 3000
             ENTRYPOINT: /bin/bash
 
     steps:
       - checkout
       #- run: sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" rails
       - run: sudo cp for_docker_stuff ~/.ssh
-      - run: ssh -v -i ~/.ssh/for_docker_stuff -o StrictHostKeyChecking=no root@custom_rails
+      - run: ssh -v -i ~/.ssh/for_docker_stuff -o StrictHostKeyChecking=no -p 3000 root@custom_rails
 
   build-docker-file:
     docker:
