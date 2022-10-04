@@ -14,7 +14,7 @@ jobs:
       #- run: sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" rails
       - setup_remote_docker:
           docker_layer_caching: false
-      - run: ssh -o StrictHostKeyChecking=no root@rails
+      - run: ssh -o StrictHostKeyChecking=no -p 3000 root@localhost 
 
   build-docker-file:
     docker:
