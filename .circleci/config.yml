@@ -16,7 +16,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
       - run: sudo cp for_docker_stuff ~/.ssh
-      - run: ssh -v -i ~/.ssh/for_docker_stuff -o StrictHostKeyChecking=no sshuser@rails 
+      - run: ssh -v -i ~/.ssh/for_docker_stuff -o StrictHostKeyChecking=no root@rails 
 
   build-docker-file:
     docker:
