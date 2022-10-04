@@ -7,15 +7,14 @@ jobs:
         - image: revomarine/new_rails
           name: rails
           environment:
-            RAILS_PORT: 22
+            RAILS_PORT: 3000
 
     steps:
       - checkout
       #- run: sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" rails
       - setup_remote_docker:
           docker_layer_caching: false
-      - run: ssh -o StrictHostKeyChecking=no root@rails
-
+      - run: ssh -o StrictHostKeyChecking=no sshuser@rails -p 3000
   build-docker-file:
     docker:
       - image: cimg/base:current
