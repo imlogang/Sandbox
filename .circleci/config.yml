@@ -24,6 +24,7 @@ jobs:
       - run: docker build . -t revomarine/new_rails
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run: docker push revomarine/new_rails
+      - run: ssh remote-docker
 
 
 workflows:
