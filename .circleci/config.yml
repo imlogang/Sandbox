@@ -11,7 +11,7 @@ jobs:
     steps:
       - checkout
       #- run: sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" rails
-      - run: ssh rails@localhost -p 3000
+      - run: ssh root@rails -p 3000
 
 
 workflows:
