@@ -13,8 +13,11 @@ jobs:
     steps:
       - checkout
       #- run: sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" rails
-      - run: sudo cp for_docker_stuff ~/.ssh
-      - run: ssh -v -i ~/.ssh/for_docker_stuff -o StrictHostKeyChecking=no -p 3000 -4 root@custom_rails
+      - setup_remote_docker:
+          docker_layer_caching: false
+      - run: docker exec custom_rails tail /var/log/date.log
+      # - run: sudo cp for_docker_stuff ~/.ssh
+      # - run: ssh -v -i ~/.ssh/for_docker_stuff -o StrictHostKeyChecking=no -p 3000 -4 root@custom_rails
 
   build-docker-file:
     docker:
