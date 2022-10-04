@@ -5,20 +5,22 @@ jobs:
     docker:
         - image: cimg/python:3.10.0
         - image: revomarine/new_rails
+          name: rails
           environment:
             RAILS_PORT: 3000
 
     steps:
       - checkout
       #- run: sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" rails
-      - run: ssh circleci@revomarine/new_rails -p 22
+      - run: ssh circleci@rails -p 22
 
   build-docker-file:
     docker:
       - image: cimg/base:current
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run: docker build . -t revomarine/new_rails
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run: docker push revomarine/new_rails
