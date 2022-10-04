@@ -5,8 +5,8 @@ jobs:
     docker:
         - image: cimg/python:3.10.0
         - image: revomarine/new_rails
+          name: rails
           environment:
-            name: rails
             RAILS_PORT: 3000
 
     steps:
