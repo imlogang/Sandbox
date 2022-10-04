@@ -1,51 +1,12 @@
 version: 2.1
-commands:
- setup-python-dependencies:
-   description: Setup the python environment for testing and linting
-   steps:
-     - checkout:
-         path: ~/project
-     - run: echo "export PATH=$HOME/.poetry/bin:$PATH" >> $BASH_ENV
-     - run: curl -sSL https://install.python-poetry.org | python3 -
-     - run: poetry install
 
 jobs:
   dbt-build-ci:
     docker:
-       - image: cimg/python:3.10.0
-    steps:
-      - setup-python-dependencies
-      - run: poetry run dbt deps --project-dir resources
-      - run:
-          name: compile dbt manifest in master branch
-          # use --target prod so the --defer will work correctly
-          command: |
-            git checkout master
-            poetry run dbt debug --project-dir resources --target prod
-            poetry run dbt compile --project-dir resources --target prod
-            mv resources/target/manifest.json .
-      - run: git checkout ${CIRCLE_BRANCH}
-      # separate run and test because "dbt build" will fail all downstream if upstream tests fail. We still want to see all tests results if the test failure is from production
-      # currently there is a version bug with state:modified.body, we will add state:modified.body back once we update dbt to be 1.0.4;
-      - run: poetry run dbt run --models state:modified --defer --state ~/project --exclude tag:skip-ci --project-dir resources -x
-      - run: poetry run dbt test --models state:modified --defer --state ~/project --exclude tag:skip-ci --project-dir resources
+        - image: cimg/python:3.10.0
+        - image: rails:latest
 
 workflows:
   commit:
     jobs:
-      - dbt-build-ci:
-          context: dbt-ci-cd
-          filters:
-            branches:
-              ignore:
-                - master
-
-
-                if [[ -d $1 ]]; then
-                  - persist_to_workspace:
-                    root: build
-                    paths:
-                      - '*.xcresult'
-                else
-                  echo The specified paths did not match any files in /Users/distiller/project/build
-                fi
+      - dbt-build-ci
