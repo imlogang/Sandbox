@@ -28,6 +28,7 @@ jobs:
 workflows:
   commit:
     jobs:
+      - build-docker-file
       - dbt-build-ci:
           requires:
           - build-docker-file
