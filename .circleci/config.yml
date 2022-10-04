@@ -5,16 +5,14 @@ jobs:
     docker:
         - image: cimg/python:3.10.0
         - image: revomarine/new_rails
-          name: rails
+          name: custom_rails
           environment:
-            name: custom_rails
             RAILS_PORT: 22
+            ENTRYPOINT: /bin/bash
 
     steps:
       - checkout
       #- run: sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" rails
-      - setup_remote_docker:
-          docker_layer_caching: false
       - run: sudo cp for_docker_stuff ~/.ssh
       - run: ssh -v -i ~/.ssh/for_docker_stuff -o StrictHostKeyChecking=no root@custom_rails
 
