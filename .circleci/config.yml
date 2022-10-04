@@ -12,6 +12,7 @@ jobs:
     steps:
       - checkout
       #- run: sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" rails
+      - run: sudo docker exec –it rails /bin/bash
       - run: ssh root@rails
 
   build-docker-file:
@@ -24,7 +25,6 @@ jobs:
       - run: docker build . -t revomarine/new_rails
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run: docker push revomarine/new_rails
-      - run: ssh remote-docker
 
 
 workflows:
