@@ -7,6 +7,7 @@ jobs:
         - image: revomarine/new_rails
           name: custom_rails
           environment:
+            name: custom_rails
             RAILS_PORT: 3000
             ENTRYPOINT: /bin/bash
 
