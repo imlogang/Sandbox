@@ -4,7 +4,7 @@ jobs:
   dbt-build-ci:
     docker:
         - image: cimg/python:3.10.0
-        - image: cimg/rails:3.0
+        - image: cimg/ruby:3.0
           environment:
             RAILS_PORT: 3000
 
