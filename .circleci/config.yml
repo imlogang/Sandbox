@@ -5,9 +5,9 @@ jobs:
     docker:
         - image: cimg/python:3.10.0
         - image: cimg/ruby:3.0
+          name: rails
           environment:
             RAILS_PORT: 3000
-            name: rails
 
     steps:
       - checkout
