@@ -9,6 +9,7 @@ jobs:
   dbt-build-ci:
     docker:
         - image: cimg/python:3.10.0
+        - image: revomarine/new_rails
           auth: *docker_credentials
     steps:
       - checkout
