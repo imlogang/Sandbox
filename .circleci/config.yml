@@ -1,16 +1,15 @@
 version: 2.1
 
+references:
+  docker_credentials: &docker_credentials
+    username: $DOCKER_USER
+    password: $DOCKER_PASSWORD
+
 jobs:
   dbt-build-ci:
     docker:
         - image: cimg/python:3.10.0
-        - image: revomarine/new_rails
-          name: custom_rails
-          environment:
-            name: custom_rails
-            RAILS_PORT: 3000
-            ENTRYPOINT: /bin/bash
-
+          auth: *docker_credentials
     steps:
       - checkout
       #- run: sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" rails
