@@ -25,10 +25,10 @@ restore_repo: &restore_repo
       key: *repo_cache_key
 
 save_repo: &save_repo
-    save_cache:
-      key: *repo_cache_key
-      paths:
-        - *working_directory
+  save_cache:
+    key: *repo_cache_key
+    paths:
+      - *working_directory
 
 commands: &set_terraform_environment
   aws-oidc-setup:
@@ -130,7 +130,7 @@ workflows:
           filters:
             branches:
               only:
-              - master 
+              - main
               - staging
               - dev
       - approve:
