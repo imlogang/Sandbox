@@ -32,11 +32,11 @@ save_repo: &save_repo
 
 commands: &set_terraform_environment
   aws-oidc-setup:
-    description: Setup AWS auth using OIDC token
+    description: set terraform environment
     parameters:
       aws-role-arn:
         type: string
-        default: hello
+        default: $AWS_ROLE
     steps:
       - run:
           name: Get short-term credentials
@@ -45,6 +45,13 @@ commands: &set_terraform_environment
             if [ "$CIRCLE_BRANCH" == "circleci_terraform" ]; then
               mkdir .aws && cd .aws && touch credentials
               STS=$(aws sts assume-role-with-web-identity --role-arn arn:aws:iam::713463347743:role/sre-circleci-job --role-session-name "${CIRCLE_BRANCH}-${CIRCLE_BUILD_NUM}" --web-identity-token "${CIRCLE_OIDC_TOKEN}" --duration-seconds 900 --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]' --output text)
+              echo -e "[default]\naws_access_key_id=${STS[0]}\naws_secret_access_key=${STS[1]}\n" > /home/circleci/.aws/credentials
+              echo 'aws configure --profile terraform-sre-aws list'
+              echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+              echo 'export TERRAFORM_ENVIRONMENT=terraform-sre-aws' >> $BASH_ENV
+              echo "export AWS_ACCESS_KEY_ID=${STS[0]}" >> $BASH_ENV
+              echo "export AWS_SECRET_ACCESS_KEY=${STS[1]}" >> $BASH_ENV
+              echo "export AWS_SESSION_TOKEN=${STS[2]}" >> $BASH_ENV
             fi
 
 terraform_init: &terraform_init
@@ -73,7 +80,7 @@ apply_job: &apply_job
 jobs:
   build:
     <<: *default_config
-    resource_class: xlarge
+    resource_class: large
     steps:
       - checkout
       - aws-oidc-setup
@@ -130,7 +137,7 @@ workflows:
           filters:
             branches:
               only:
-              - main
+              - master
               - staging
               - dev
       - approve:
