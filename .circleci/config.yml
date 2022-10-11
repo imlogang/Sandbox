@@ -111,7 +111,7 @@ jobs:
             cd terraform-root-aws/$TERRAFORM_ENVIRONMENT
             terraform plan -out=../../terraform.plan
       - persist_to_workspace:
-          root: ~/example
+          root: *working_directory
           paths:
             - terraform.plan
 
