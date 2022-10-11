@@ -33,8 +33,6 @@ save_repo: &save_repo
     paths:
       - *working_directory
 
-  aws-cli: circleci/aws-cli@3.0.0
-
 commands: &set_terraform_environment
   aws-oidc-setup:
     description: Setup AWS auth using OIDC token
